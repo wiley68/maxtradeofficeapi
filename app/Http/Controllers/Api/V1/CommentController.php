@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateCommentRequest;
 use App\Http\Resources\V1\CommentCollection;
 use App\Http\Resources\V1\CommentResource;
 use App\Models\Comment;
+use App\Services\V1\CommentQuery;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
