@@ -5,6 +5,7 @@ namespace App\Http\Resources\V1;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\V1\CommentResource;
+use App\Models\User;
 
 class TaskResource extends JsonResource
 {
@@ -18,6 +19,7 @@ class TaskResource extends JsonResource
         return [
             'id' => $this->id,
             'userId' => $this->user_id,
+            'userName' => User::where('id', $this->user_id)->firstOrFail()->name,
             'name' => $this->name,
             'description' => $this->description,
             'icon' => $this->icon,
