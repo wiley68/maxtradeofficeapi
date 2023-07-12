@@ -8,15 +8,22 @@ use App\Http\Requests\UpdateCommentRequest;
 use App\Http\Resources\V1\CommentCollection;
 use App\Http\Resources\V1\CommentResource;
 use App\Models\Comment;
+use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): CommentCollection
+    public function index(Request $request): CommentCollection
     {
-        return new CommentCollection(Comment::all());
+        $filter = new CommentQuery();
+        $queryItems = $filter->transform($request);
+        if (count($queryItems) == 0){
+            return new CommentCollection(Comment::all());
+        }else{
+            return new CommentCollection(Comment::where($queryItems)->get());
+        }
     }
 
     /**

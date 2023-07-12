@@ -8,15 +8,23 @@ use App\Http\Requests\UpdateTaskRequest;
 use App\Http\Resources\V1\TaskCollection;
 use App\Http\Resources\V1\TaskResource;
 use App\Models\Task;
+use App\Services\V1\TaskQuery;
+use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): TaskCollection
+    public function index(Request $request): TaskCollection
     {
-        return new TaskCollection(Task::all());
+        $filter = new TaskQuery();
+        $queryItems = $filter->transform($request);
+        if (count($queryItems) == 0){
+            return new TaskCollection(Task::all());
+        }else{
+            return new TaskCollection(Task::where($queryItems)->get());
+        }
     }
 
     /**
