@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('description', 256)->nullable();
             $table->string('icon', 24)->nullable();
             $table->boolean('status')->default(1);
-            $table->unsignedBigInteger('parent_id')->default(0);
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('tasks')->onUpdate('cascade')->onDelete('cascade');
             $table->text('info')->nullable();
             $table->timestamps();
