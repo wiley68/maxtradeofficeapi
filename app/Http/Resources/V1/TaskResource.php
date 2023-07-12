@@ -4,6 +4,7 @@ namespace App\Http\Resources\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\V1\CommentResource;
 
 class TaskResource extends JsonResource
 {
@@ -23,6 +24,7 @@ class TaskResource extends JsonResource
             'status' => $this->status,
             'parentId' => $this->parent_id,
             'info' => $this->info,
+            'comments' => $this->comments()->get()->map(fn ($comment) => new CommentResource($comment)),
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at
         ];
