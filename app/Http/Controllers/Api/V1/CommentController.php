@@ -23,7 +23,8 @@ class CommentController extends Controller
         if (count($queryItems) == 0){
             return new CommentCollection(Comment::all());
         }else{
-            return new CommentCollection(Comment::where($queryItems)->get());
+            $comments = Comment::where($queryItems)->get();
+            return new CommentCollection($comments);
         }
     }
 

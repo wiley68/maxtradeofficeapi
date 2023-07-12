@@ -23,7 +23,8 @@ class TaskController extends Controller
         if (count($queryItems) == 0){
             return new TaskCollection(Task::all());
         }else{
-            return new TaskCollection(Task::where($queryItems)->get());
+            $tasks = Task::where($queryItems)->get();
+            return new TaskCollection($tasks);
         }
     }
 
