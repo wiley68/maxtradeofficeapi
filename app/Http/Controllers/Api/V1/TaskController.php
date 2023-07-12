@@ -5,18 +5,18 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Http\Resources\V1\TaskCollection;
 use App\Http\Resources\V1\TaskResource;
 use App\Models\Task;
-use Illuminate\Database\Eloquent\Collection;
 
 class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): Collection
+    public function index(): TaskCollection
     {
-        return Task::all();
+        return new TaskCollection(Task::all());
     }
 
     /**

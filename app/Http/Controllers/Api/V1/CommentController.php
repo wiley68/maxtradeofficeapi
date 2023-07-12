@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use App\Http\Resources\V1\CommentCollection;
 use App\Http\Resources\V1\CommentResource;
 use App\Models\Comment;
 
@@ -13,9 +14,9 @@ class CommentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): CommentCollection
     {
-        //
+        return new CommentCollection(Comment::all());
     }
 
     /**
