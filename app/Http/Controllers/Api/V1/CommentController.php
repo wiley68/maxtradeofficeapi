@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Filters\V1\CommentFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Http\Resources\V1\CommentCollection;
 use App\Http\Resources\V1\CommentResource;
 use App\Models\Comment;
-use App\Services\V1\CommentQuery;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -18,7 +18,7 @@ class CommentController extends Controller
      */
     public function index(Request $request): CommentCollection
     {
-        $filter = new CommentQuery();
+        $filter = new CommentFilter();
         $queryItems = $filter->transform($request);
         if (count($queryItems) == 0){
             return new CommentCollection(Comment::all());

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Filters\V1\TaskFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Http\Resources\V1\TaskCollection;
 use App\Http\Resources\V1\TaskResource;
 use App\Models\Task;
-use App\Services\V1\TaskQuery;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -18,7 +18,7 @@ class TaskController extends Controller
      */
     public function index(Request $request): TaskCollection
     {
-        $filter = new TaskQuery();
+        $filter = new TaskFilter();
         $queryItems = $filter->transform($request);
         if (count($queryItems) == 0){
             return new TaskCollection(Task::all());

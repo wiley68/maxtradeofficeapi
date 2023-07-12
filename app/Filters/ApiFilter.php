@@ -1,28 +1,17 @@
 <?php
 
-namespace App\Services\V1;
+namespace App\Filters;
 
 use Illuminate\Http\Request;
 
-class CommentQuery {
-    protected $safeParms = [
-        'taskId' => ['eq'],
-        'userId' => ['eq'],
-        'subject' => ['like'],
-        'info' => ['like'],
-        'createdAt' => ['eq', 'lt', 'lte', 'gt', 'gte'],
-        'updatedAt' => ['eq', 'lt', 'lte', 'gt', 'gte']
-    ];
+class ApiFilter {
+    protected $safeParms = [];
 
-    protected $columnMap = [
-        'taskId' => 'task_id',
-        'userId' => 'user_id',
-        'createdAt' => 'created_at',
-        'updatedAt' => 'updated_at'
-    ];
+    protected $columnMap = [];
 
     protected $operatorMap = [
         'eq' => '=',
+        'ne' => '!=',
         'lt' => '<',
         'lte' => '<=',
         'gt' => '>',
