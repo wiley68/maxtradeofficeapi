@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use App\Http\Resources\V1\CommentResource;
 use App\Models\Comment;
 
 class CommentController extends Controller
@@ -36,9 +37,9 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Comment $comment)
+    public function show(Comment $comment): CommentResource
     {
-        //
+        return new CommentResource($comment);
     }
 
     /**
