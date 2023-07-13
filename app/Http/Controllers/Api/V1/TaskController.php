@@ -13,9 +13,6 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request): TaskCollection
     {
         $filter = new TaskFilter();
@@ -39,9 +36,9 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTaskRequest $request)
+    public function store(StoreTaskRequest $request): TaskResource
     {
-        //
+        return new TaskResource(Task::create($request->all()));
     }
 
     /**
