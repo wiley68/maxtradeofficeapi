@@ -10,7 +10,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 /** Api V1 */
-Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function(){
+Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1', 'middleware' => 'auth:sanctum'], function(){
     Route::apiResource('tasks', TaskController::class);
     Route::apiResource('comments', CommentController::class);
 });
