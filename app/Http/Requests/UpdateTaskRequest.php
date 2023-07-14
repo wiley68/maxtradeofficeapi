@@ -11,7 +11,7 @@ class UpdateTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,25 @@ class UpdateTaskRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == 'PUT'){
+            return [
+                'user_id' => ['required', 'exists:users,id'],
+                'name' => ['required', 'string'],
+                'description' => ['nullable', 'string', 'max:256'],
+                'icon' => ['nullable', 'string', 'max:24'],
+                'parent_id' => ['nullable', 'exists:tasks,id'],
+                'info' => ['nullable', 'string'],
+            ];    
+        }else{
+            return [
+                'user_id' => ['sometimes', 'required', 'exists:users,id'],
+                'name' => ['sometimes', 'string'],
+                'description' => ['sometimes', 'nullable', 'string', 'max:256'],
+                'icon' => ['sometimes', 'nullable', 'string', 'max:24'],
+                'parent_id' => ['sometimes', 'nullable', 'exists:tasks,id'],
+                'info' => ['sometimes', 'nullable', 'string'],
+            ];
+        }
     }
 }

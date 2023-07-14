@@ -11,7 +11,7 @@ class UpdateCommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,21 @@ class UpdateCommentRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == 'PUT'){
+            return [
+                'task_id' => ['required', 'exists:tasks,id'],
+                'user_id' => ['required', 'exists:users,id'],
+                'subject' => ['required', 'string', 'max:256'],
+                'info' => ['nullable', 'string'],
+            ];    
+        }else{
+            return [
+                'task_id' => ['sometimes', 'required', 'exists:tasks,id'],
+                'user_id' => ['sometimes', 'required', 'exists:users,id'],
+                'subject' => ['sometimes', 'required', 'string', 'max:256'],
+                'info' => ['sometimes', 'nullable', 'string'],
+            ];
+        }
     }
 }
