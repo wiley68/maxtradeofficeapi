@@ -27,13 +27,12 @@ class ApiFilter {
             if (!isset($query)){
                 continue;
             }
-            $column = $this->columnMap[$parm] ?? $parm;
             foreach ($operators as $operator) {
                 if (isset($query[$operator])){
                     if ($operator == 'like'){
-                        $eloQuery[] = [$column, $this->operatorMap[$operator], '%' . $query[$operator] . '%'];
+                        $eloQuery[] = [$parm, $this->operatorMap[$operator], '%' . $query[$operator] . '%'];
                     }else{
-                        $eloQuery[] = [$column, $this->operatorMap[$operator], $query[$operator]];
+                        $eloQuery[] = [$parm, $this->operatorMap[$operator], $query[$operator]];
                     }
                 }
             }

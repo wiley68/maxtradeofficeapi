@@ -18,17 +18,17 @@ class TaskResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'userId' => $this->user_id,
-            'userName' => User::where('id', $this->user_id)->firstOrFail()->name,
+            'user_id' => $this->user_id,
+            'user_name' => User::where('id', $this->user_id)->firstOrFail()->name,
             'name' => $this->name,
             'description' => $this->description,
             'icon' => $this->icon,
             'status' => $this->status,
-            'parentId' => $this->parent_id,
+            'parent_id' => $this->parent_id,
             'info' => $this->info,
             'comments' => $this->comments()->get()->map(fn ($comment) => new CommentResource($comment)),
-            'createdAt' => $this->created_at,
-            'updatedAt' => $this->updated_at
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at
         ];
     }
 }

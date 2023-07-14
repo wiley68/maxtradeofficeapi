@@ -6,18 +6,11 @@ use App\Filters\ApiFilter;
 
 class CommentFilter extends ApiFilter {
     protected $safeParms = [
-        'taskId' => ['eq', 'ne'],
-        'userId' => ['eq', 'ne'],
+        'task_id' => ['eq', 'ne'],
+        'user_id' => ['eq', 'ne'],
         'subject' => ['like'],
         'info' => ['like'],
-        'createdAt' => ['eq', 'ne', 'lt', 'lte', 'gt', 'gte'],
-        'updatedAt' => ['eq', 'ne', 'lt', 'lte', 'gt', 'gte']
-    ];
-
-    protected $columnMap = [
-        'taskId' => 'task_id',
-        'userId' => 'user_id',
-        'createdAt' => 'created_at',
-        'updatedAt' => 'updated_at'
+        'created_at' => ['eq', 'ne', 'lt', 'lte', 'gt', 'gte'],
+        'updated_at' => ['eq', 'ne', 'lt', 'lte', 'gt', 'gte']
     ];
 }

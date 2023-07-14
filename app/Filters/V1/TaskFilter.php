@@ -6,20 +6,13 @@ use App\Filters\ApiFilter;
 
 class TaskFilter extends ApiFilter {
     protected $safeParms = [
-        'userId' => ['eq', 'ne'],
+        'user_id' => ['eq', 'ne'],
         'name' => ['like'],
         'description' => ['like'],
         'status' => ['eq', 'ne', 'lt', 'lte', 'gt', 'gte'],
-        'parentId' => ['eq', 'ne', 'lt', 'lte', 'gt', 'gte'],
+        'parent_id' => ['eq', 'ne', 'lt', 'lte', 'gt', 'gte'],
         'info' => ['like'],
-        'createdAt' => ['eq', 'ne', 'lt', 'lte', 'gt', 'gte'],
-        'updatedAt' => ['eq', 'ne', 'lt', 'lte', 'gt', 'gte']
-    ];
-
-    protected $columnMap = [
-        'userId' => 'user_id',
-        'parentId' => 'parent_id',
-        'createdAt' => 'created_at',
-        'updatedAt' => 'updated_at'
+        'created_at' => ['eq', 'ne', 'lt', 'lte', 'gt', 'gte'],
+        'updated_at' => ['eq', 'ne', 'lt', 'lte', 'gt', 'gte']
     ];
 }
